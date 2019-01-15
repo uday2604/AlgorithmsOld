@@ -1,0 +1,8 @@
+#IDE Metadata:
+.idea/
+
+#Output Files:
+out/
+
+#Ignore IML Files:
+*.iml

@@ -1,0 +1,8 @@
+
+1) Breadth First Search of a binary tree is similar to Level Order Traversal. This can be implemented with the help of a queue.
+For Breadth first, add all children to queue, then pull the head and do breadth first search on it (Recursive way)
+
+2) Depth First Search of a binary tree is more similar to Pre Order Traversal of the tree.
+For Depth first search, add all children to stack, then pop and do the depth first search on that node using the same stack (Recursive way)
+
+
