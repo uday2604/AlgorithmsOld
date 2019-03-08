@@ -18,9 +18,9 @@ public class ConstructBinaryTreeFromInAndPostOrder {
 
         BinaryTreeNode(int data) {
 
-            this.data=data;
-            this.llink=null;
-            this.rlink=null;
+            this.data = data;
+            this.llink = null;
+            this.rlink = null;
         }
 
     }
@@ -29,39 +29,39 @@ public class ConstructBinaryTreeFromInAndPostOrder {
     public BinaryTreeNode constructTreeFromInOrderAndPostOrder(int[] inOrder, int[] postOrder) {
 
 
-        return constructTreeHelper(inOrder, postOrder, 0, inOrder.length-1, 0, postOrder.length-1);
+        return constructTreeHelper(inOrder, postOrder, 0, inOrder.length - 1, 0, postOrder.length - 1);
 
     }
 
     public BinaryTreeNode constructTreeHelper(int[] inOrder, int[] postOrder, int inOrderStart, int inOrderEnd, int postOrderStart, int postOrderEnd) {
 
 
-                if(inOrderStart>inOrderEnd || postOrderStart>postOrderEnd)
-                    return null;
+        if (inOrderStart > inOrderEnd || postOrderStart > postOrderEnd)
+            return null;
 
-                    int rootElementValue = postOrder[postOrderEnd];
-                    BinaryTreeNode root = new BinaryTreeNode(rootElementValue);
+        int rootElementValue = postOrder[postOrderEnd];
+        BinaryTreeNode root = new BinaryTreeNode(rootElementValue);
 
-                    int rootPositionFromInOrder=0;
-                    for(int i=0; i<inOrder.length;i++) {
+        int rootPositionFromInOrder = 0;
+        for (int i = 0; i < inOrder.length; i++) {
 
-                        if (inOrder[i] == rootElementValue) {
-                            rootPositionFromInOrder = i;
-                            break;
-                        }
-                    }
+            if (inOrder[i] == rootElementValue) {
+                rootPositionFromInOrder = i;
+                break;
+            }
+        }
 
-                    root.llink=constructTreeHelper(inOrder, postOrder, inOrderStart, rootPositionFromInOrder-1, postOrderStart, postOrderStart+rootPositionFromInOrder-(inOrderStart+1));//postOrderStart+rootPositionFromInOrder-(inOrderStart+1)
-                    root.rlink=constructTreeHelper(inOrder, postOrder, rootPositionFromInOrder+1, inOrderEnd, postOrderStart+rootPositionFromInOrder-inOrderStart,postOrderEnd-1);
+        root.llink = constructTreeHelper(inOrder, postOrder, inOrderStart, rootPositionFromInOrder - 1, postOrderStart, postOrderStart + rootPositionFromInOrder - (inOrderStart + 1));//postOrderStart+rootPositionFromInOrder-(inOrderStart+1)
+        root.rlink = constructTreeHelper(inOrder, postOrder, rootPositionFromInOrder + 1, inOrderEnd, postOrderStart + rootPositionFromInOrder - inOrderStart, postOrderEnd - 1);
 
-            return root;
+        return root;
 
     }
 
 
     public static void levelOrderTraversal(BinaryTreeNode root) {
 
-        if(root==null)
+        if (root == null)
             System.out.println("No elements in the tree");
 
         else {
@@ -69,15 +69,15 @@ public class ConstructBinaryTreeFromInAndPostOrder {
             Queue<BinaryTreeNode> nodeStoreQueue = new LinkedList<>();
             nodeStoreQueue.offer(root);
 
-            while(!nodeStoreQueue.isEmpty()) {
+            while (!nodeStoreQueue.isEmpty()) {
 
                 BinaryTreeNode temp = nodeStoreQueue.poll();
-                System.out.print(temp.data+" ");
+                System.out.print(temp.data + " ");
 
-                if(temp.llink!=null)
+                if (temp.llink != null)
                     nodeStoreQueue.offer(temp.llink);
 
-                if(temp.rlink!=null)
+                if (temp.rlink != null)
                     nodeStoreQueue.offer(temp.rlink);
 
             }
@@ -93,17 +93,15 @@ public class ConstructBinaryTreeFromInAndPostOrder {
         ConstructBinaryTreeFromInAndPostOrder constructBinaryTreeFromInAndPostOrder = new ConstructBinaryTreeFromInAndPostOrder();
 
         int[] inOrderElements = {7, 11, 2, 4, 5, 13, 8, 6, 1};
-        int[] postOrderElements = {7, 2, 11, 4, 13, 1, 6, 8,5};
+        int[] postOrderElements = {7, 2, 11, 4, 13, 1, 6, 8, 5};
 
         BinaryTreeNode newTreeRoot = constructBinaryTreeFromInAndPostOrder.constructTreeFromInOrderAndPostOrder(inOrderElements, postOrderElements);
-      //  BinaryTreeNode newTreeRoot = constructBinaryTreeFromInAndPostOrder.buildTree(inOrderElements, postOrderElements);
+        //  BinaryTreeNode newTreeRoot = constructBinaryTreeFromInAndPostOrder.buildTree(inOrderElements, postOrderElements);
 
         levelOrderTraversal(newTreeRoot);
 
 
     }
-
-
 
 
 }

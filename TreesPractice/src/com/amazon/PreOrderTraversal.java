@@ -10,61 +10,46 @@ import java.util.Stack;
 public class PreOrderTraversal {
 
     static class BinaryTreeNode {
-
         BinaryTreeNode llink;
         BinaryTreeNode rlink;
         int data;
 
         BinaryTreeNode(int data) {
-
-            this.data=data;
-            this.llink=null;
-            this.rlink=null;
+            this.data = data;
+            this.llink = null;
+            this.rlink = null;
         }
 
     }
-
 
 
     // Efficient and simple solution. As left side of tree should be processed before right tree, right link should be stored first in the stack
     // so that when popping from it, left node would be processed first
     public List<BinaryTreeNode> preOrderTraversalIterative(BinaryTreeNode root) {
-
-        if(root==null)
+        if (root == null)
             return null;
-
         else {
-
             Stack<BinaryTreeNode> nodeStoreStack = new Stack<>();
             List<BinaryTreeNode> outputList = new ArrayList<>();
+            nodeStoreStack.push(root);
 
-            BinaryTreeNode current =root;
-            nodeStoreStack.push(current);
-
-            while(!nodeStoreStack.isEmpty()) {
-
+            while (!nodeStoreStack.isEmpty()) {
                 BinaryTreeNode temp = nodeStoreStack.pop();
                 outputList.add(temp);
 
-                if(temp.rlink!=null)
+                if (temp.rlink != null)
                     nodeStoreStack.push(temp.rlink);
 
-                if(temp.llink!=null)
+                if (temp.llink != null)
                     nodeStoreStack.push(temp.llink);
-
             }
-
-        return outputList;
-
+            return outputList;
         }
-
-
     }
 
 
     public void preOrderTraversal(BinaryTreeNode root) {
-
-        if(root!=null){
+        if (root != null) {
             System.out.print(root.data + " ");
             preOrderTraversal(root.llink);
             preOrderTraversal(root.rlink);
@@ -83,14 +68,14 @@ public class PreOrderTraversal {
         BinaryTreeNode node5 = new BinaryTreeNode(8);
         BinaryTreeNode node6 = new BinaryTreeNode(9);
 
-        root.llink=node1;
-        root.rlink=node2;
+        root.llink = node1;
+        root.rlink = node2;
 
-        node1.llink=node3;
-        node1.rlink=node4;
+        node1.llink = node3;
+        node1.rlink = node4;
 
-        node2.llink=node5;
-        node2.rlink=node6;
+        node2.llink = node5;
+        node2.rlink = node6;
 
         PreOrderTraversal preOrderTraversal = new PreOrderTraversal();
         preOrderTraversal.preOrderTraversal(root);
@@ -99,8 +84,8 @@ public class PreOrderTraversal {
         System.out.println("\nThe pre order traversal through iterative method is:");
         List<BinaryTreeNode> outputList = preOrderTraversal.preOrderTraversalIterative(root);
 
-        for(BinaryTreeNode temp: outputList)
-            System.out.print(temp.data+" ");
+        for (BinaryTreeNode temp : outputList)
+            System.out.print(temp.data + " ");
 
     }
 }

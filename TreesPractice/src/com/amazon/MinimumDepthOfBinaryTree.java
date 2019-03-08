@@ -39,14 +39,8 @@ public class MinimumDepthOfBinaryTree {
                 nodeStoreQueue.offer(temp.rlink);
                 nodeValueCount.offer(count+1);
             }
-
-
         }
-
-
         return nodeValueCount.poll();
-
-
     }
 
     public  static  void main(String[] args) {

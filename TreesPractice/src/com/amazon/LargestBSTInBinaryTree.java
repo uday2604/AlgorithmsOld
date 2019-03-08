@@ -6,51 +6,39 @@ package com.amazon;
 public class LargestBSTInBinaryTree {
 
     static class BinaryTreeNode {
-
         BinaryTreeNode llink;
         BinaryTreeNode rlink;
         int data;
 
         BinaryTreeNode(int data) {
-
             this.data=data;
             this.llink=null;
             this.rlink=null;
         }
-
     }
 
     static class Wrapper {
-
         boolean isBST;
         int size;
         int min, max;
 
-        public Wrapper () {
-
+        private Wrapper () {
             isBST=false;
             min=Integer.MAX_VALUE;
             max= Integer.MIN_VALUE;
             size=0;
 
         }
-
     }
 
-
-    public static int sizeOfLargestBST(BinaryTreeNode root) {
-
-            return helperForBST(root).size;
-
+    private static int sizeOfLargestBST(BinaryTreeNode root) {
+        return helperForBST(root).size;
     }
 
-
-    public static Wrapper helperForBST(BinaryTreeNode root) {
+    private static Wrapper helperForBST(BinaryTreeNode root) {
 
         Wrapper current = new Wrapper();
-
         if(root==null) {
-
             current.isBST=true;
             return current;
         }
@@ -62,24 +50,17 @@ public class LargestBSTInBinaryTree {
         current.max = Math.max(root.data, right.max);
 
         if(left.isBST && right.isBST && root.data>=left.max && root.data <=right.min) {
-
             current.isBST=true;
             current.size=left.size+right.size+1;
-
         }
         else {
-
             current.isBST=false;
             current.size= Math.max(left.size, right.size);
         }
-
-
         return current;
-
     }
 
     public static void main(String[] args) {
-
 
         BinaryTreeNode root = new BinaryTreeNode(7);
         BinaryTreeNode node1 = new BinaryTreeNode(4);
@@ -98,13 +79,8 @@ public class LargestBSTInBinaryTree {
         node2.llink = node5;
         node2.rlink=node6;
 
-
         int maxSizeOfBST = LargestBSTInBinaryTree.sizeOfLargestBST(root);
         System.out.println("The max size is: "+maxSizeOfBST);
 
     }
-
-
-
-
 }
