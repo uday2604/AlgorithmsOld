@@ -98,12 +98,5 @@ public class ConstructTreeFromInAndPreOrderTraversal {
 
         BinaryTreeNode newTreeRoot = constructTreeFromInAndPreOrderTraversal.constructTreeFromInOrderAndPreOrder(inOrderElements, preOrderElements);
         levelOrderTraversal(newTreeRoot);
-
-
     }
-
-
-
-
-
 }

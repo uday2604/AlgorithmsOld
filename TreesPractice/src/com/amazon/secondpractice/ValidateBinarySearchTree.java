@@ -6,14 +6,11 @@ package com.amazon.secondpractice;
 public class ValidateBinarySearchTree {
 
 
-    public boolean validateBST (BinaryTreeNode root) {
-
-          return isValidBSTHelper(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
-
-
+    private boolean validateBST (BinaryTreeNode root) {
+        return isValidBSTHelper(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
-    public boolean isValidBSTHelper(BinaryTreeNode root, int min, int max) {
+    private boolean isValidBSTHelper(BinaryTreeNode root, int min, int max) {
 
         if(root==null)
             return true;
@@ -22,13 +19,11 @@ public class ValidateBinarySearchTree {
                 return false;
 
         return isValidBSTHelper(root.llink, min,root.data) && isValidBSTHelper(root.rlink, root.data, max);
-
     }
 
 
 
     public static void main(String[] args) {
-
 
         BinaryTreeNode root = new BinaryTreeNode(7);
         BinaryTreeNode node1 = new BinaryTreeNode(4);
@@ -50,9 +45,5 @@ public class ValidateBinarySearchTree {
         ValidateBinarySearchTree validateBinarySearchTree = new ValidateBinarySearchTree();
         boolean isTreeValidBST = validateBinarySearchTree.validateBST(root);
         System.out.println("The tree is valid BST: "+isTreeValidBST);
-
     }
-
-
-
 }

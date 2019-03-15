@@ -5,18 +5,16 @@ package com.amazon.secondpractice;
  */
 public class BinaryTreeNode {
 
-        BinaryTreeNode llink;
-        BinaryTreeNode rlink;
-        int data;
+    BinaryTreeNode llink;
+    BinaryTreeNode rlink;
+    int data;
 
-        BinaryTreeNode(int data) {
-            this.data=data;
-            this.llink=null;
-            this.rlink=null;
-
-        }
+    BinaryTreeNode(int data) {
+        this.data = data;
+        this.llink = null;
+        this.rlink = null;
 
     }
-
+}
 
 

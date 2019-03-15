@@ -7,7 +7,7 @@ import java.util.Stack;
  */
 public class InOrderSuccessorOfBST {
 
-    static class BinaryTreeNode  {
+    static class BinaryTreeNode {
 
         int data;
         BinaryTreeNode llink;
@@ -15,76 +15,66 @@ public class InOrderSuccessorOfBST {
 
         BinaryTreeNode(int data) {
 
-            this.data=data;
-            this.llink=null;
-            this.rlink=null;
+            this.data = data;
+            this.llink = null;
+            this.rlink = null;
         }
-
-
     }
 
-    public static BinaryTreeNode findNodeInBST (BinaryTreeNode root, int data) {
+    public static BinaryTreeNode findNodeInBST(BinaryTreeNode root, int data) {
 
-        if(root==null)
+        if (root == null)
             return null;
 
-        if(root.data==data)
+        if (root.data == data)
             return root;
 
-        if(root.data>data)
+        if (root.data > data)
             return findNodeInBST(root.llink, data);
 
-        if(root.data<data)
+        if (root.data < data)
             return findNodeInBST(root.rlink, data);
 
         return null;
-
     }
 
 
     public static BinaryTreeNode findSuccessor(BinaryTreeNode root, int data) {
 
-        if(root==null)
+        if (root == null)
             return null;
 
         BinaryTreeNode deleteNode = findNodeInBST(root, data);
 
-       // Case 1 : If delete node has the right sub tree, just find the min node in right sub tree and return it
-        if(deleteNode.rlink!=null) {
+        // Case 1 : If delete node has the right sub tree, just find the min node in right sub tree and return it
+        if (deleteNode.rlink != null) {
             return findMinimumNode(deleteNode.rlink);
         }
 
         // Case 2: Else, traverse down from root to delete node and adjust the pointers
         else {
-
             BinaryTreeNode ancestor = root;
             BinaryTreeNode successor = null;
 
-            while (ancestor!=deleteNode) {
+            while (ancestor != deleteNode) {
 
-                if(ancestor.data > deleteNode.data) {
-                    successor=ancestor;
-                    ancestor=ancestor.llink;
+                if (ancestor.data > deleteNode.data) {
+                    successor = ancestor;
+                    ancestor = ancestor.llink;
+
+                } else {
+                    ancestor = ancestor.rlink;
 
                 }
-                else {
-                    ancestor=ancestor.rlink;
-
-                }
-
-
             }
             return successor;
-
         }
-
-
     }
 
     public static BinaryTreeNode findMinimumNode(BinaryTreeNode node) {
 
-        while(node.llink!=null) {
-            node=node.llink;
+        while (node.llink != null) {
+            node = node.llink;
         }
         return node;
     }
@@ -96,59 +86,40 @@ public class InOrderSuccessorOfBST {
     // Time complexity : O(n)
     public static BinaryTreeNode findInOrderSuccessor(BinaryTreeNode root, BinaryTreeNode findNode) {
 
-
-        if(root==null || findNode==null)
+        if (root == null || findNode == null)
             return null;
 
-        
         Stack<BinaryTreeNode> nodeStoreStack = new Stack<>();
         BinaryTreeNode current = root;
 
-        while (!nodeStoreStack.isEmpty() || current!=null) {
-
-            if(current!=null) {
+        while (!nodeStoreStack.isEmpty() || current != null) {
+            if (current != null) {
                 nodeStoreStack.add(current);
-                current=current.llink;
-            }
-
-            else {
-
+                current = current.llink;
+            } else {
                 BinaryTreeNode temp = nodeStoreStack.pop();
-                current=temp.rlink;
+                current = temp.rlink;
 
-                if(temp==findNode) {
+                if (temp == findNode) {
 
-                    if(temp.rlink!=null) {
+                    if (temp.rlink != null) {
                         BinaryTreeNode successor = temp.rlink;
-                        while(successor.llink!=null) {
+                        while (successor.llink != null) {
 
-                            successor=successor.llink;
+                            successor = successor.llink;
                         }
                         return successor;
 
-                    }
-                    else if(!nodeStoreStack.isEmpty()) {
+                    } else if (!nodeStoreStack.isEmpty()) {
                         return nodeStoreStack.pop();
                     }
-
                 }
-
-
             }
-
-
         }
-
         return null;
-
     }
 
-
-
-
-
     public static void main(String[] args) {
-
 
         BinaryTreeNode root = new BinaryTreeNode(7);
         BinaryTreeNode node1 = new BinaryTreeNode(4);
@@ -166,12 +137,11 @@ public class InOrderSuccessorOfBST {
         node1.rlink = node4;
 
         node2.llink = node5;
-        node2.rlink=node6;
+        node2.rlink = node6;
 
-        node4.llink=node7;
+        node4.llink = node7;
 
-
-        BinaryTreeNode successorNode =InOrderSuccessorOfBST.findInOrderSuccessor(root, node4);
+        BinaryTreeNode successorNode = InOrderSuccessorOfBST.findInOrderSuccessor(root, node4);
         System.out.println(successorNode.data);
 
         /*BinaryTreeNode successorNode =InOrderSuccessorOfBST.inorderSuccessor(root, node1);
@@ -187,7 +157,6 @@ public class InOrderSuccessorOfBST {
        /* BinaryTreeNode testNode2 = InOrderSuccessorOfBST.findSuccessor(root, 6);
         System.out.println(testNode2.data);
 */
-
 
     }
 

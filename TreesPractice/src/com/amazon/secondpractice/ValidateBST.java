@@ -9,75 +9,54 @@ import java.util.Queue;
 public class ValidateBST {
 
     static class Wrapper {
-
         int left;
         int right;
         BinaryTreeNode node;
 
         Wrapper(BinaryTreeNode node, int left, int right) {
-
-            this.node=node;
-            this.left=left;
-            this.right=right;
-
+            this.node = node;
+            this.left = left;
+            this.right = right;
         }
-
-
     }
 
     // Iterative Method (Used Level Order Traversal)
-    public static boolean isValidBSTIterative (BinaryTreeNode root) {
+    private static boolean isValidBSTIterative(BinaryTreeNode root) {
+        if (root == null) {
+            return true;
+        } else {
+            Queue<Wrapper> nodeStoreQueue = new LinkedList<>();
+            nodeStoreQueue.offer(new Wrapper(root, Integer.MIN_VALUE, Integer.MAX_VALUE));
 
-            if(root==null)
-                return true;
+            while (!nodeStoreQueue.isEmpty()) {
+                Wrapper temp = nodeStoreQueue.poll();
 
-            else {
+                if (temp.node.data < temp.left || temp.node.data > temp.right)
+                    return false;
 
-                Queue<Wrapper> nodeStoreQueue = new LinkedList<>();
+                if (temp.node.llink != null)
+                    nodeStoreQueue.offer(new Wrapper(temp.node.llink, temp.left, temp.node.data));
 
-                nodeStoreQueue.offer(new Wrapper(root, Integer.MIN_VALUE, Integer.MAX_VALUE));
-
-                while(!nodeStoreQueue.isEmpty()) {
-
-                    Wrapper temp = nodeStoreQueue.poll();
-
-                    if(temp.node.data<temp.left || temp.node.data>temp.right)
-                        return false;
-
-                    if(temp.node.llink!=null)
-                        nodeStoreQueue.offer(new Wrapper(temp.node.llink, temp.left, temp.node.data));
-
-                    if(temp.node.rlink!=null)
-                        nodeStoreQueue.offer(new Wrapper(temp.node.rlink, temp.node.data, temp.right ));
-
-
-                }
-
-                return true;
-
+                if (temp.node.rlink != null)
+                    nodeStoreQueue.offer(new Wrapper(temp.node.rlink, temp.node.data, temp.right));
             }
-
+            return true;
+        }
     }
-
 
     // Recursive Approach
-    public static boolean isGivenTreeValidBST(BinaryTreeNode root) {
-
+    private static boolean isGivenTreeValidBST(BinaryTreeNode root) {
         return isValidBSTHelper(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
-
-
     }
 
-    public static boolean isValidBSTHelper (BinaryTreeNode root, int min, int max) {
-
-        if(root==null)
+    private static boolean isValidBSTHelper(BinaryTreeNode root, int min, int max) {
+        if (root == null)
             return true;
 
-        if(root.data<min || root.data>max)
+        if (root.data < min || root.data > max)
             return false;
 
         return isValidBSTHelper(root.llink, min, root.data) && isValidBSTHelper(root.rlink, root.data, max);
-
     }
 
     public static void main(String[] args) {
@@ -98,20 +77,14 @@ public class ValidateBST {
         node1.rlink = node4;
 
         node2.llink = node5;
-        node2.rlink=node6;
+        node2.rlink = node6;
 
-        node4.llink=node7;
+        node4.llink = node7;
 
-
-        boolean isValid =isGivenTreeValidBST(root);
-        System.out.println("Valid BST or not: "+isValid);
+        boolean isValid = isGivenTreeValidBST(root);
+        System.out.println("Valid BST or not: " + isValid);
 
         boolean isValidIterative = isValidBSTIterative(root);
-        System.out.println("Valid BST or not iterative: "+isValidIterative);
-
-
-
+        System.out.println("Valid BST or not iterative: " + isValidIterative);
     }
-
-
 }
