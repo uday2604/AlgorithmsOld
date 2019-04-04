@@ -1,16 +1,22 @@
 package com.amazon;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * Created by udaypersonal on 9/5/16.
+ * Invert Binary Tree: Recursive and Iterative approaches
  */
 public class InvertBinaryTree {
 
+    // Recursive approach
     private BinaryTreeNode invertBinaryTree(BinaryTreeNode root) {
         if (root != null)
             invertTreeHelper(root);
         return root;
     }
 
+    // Recursive approach : helper
     private void invertTreeHelper(BinaryTreeNode root) {
         BinaryTreeNode temp = root.rlink;
         root.rlink = root.llink;
@@ -20,6 +26,28 @@ public class InvertBinaryTree {
         }
         if (root.rlink != null)
             invertTreeHelper(root.rlink);
+    }
+
+    // Iterative approach
+    private BinaryTreeNode invertBinaryTreeIterative(BinaryTreeNode root) {
+        if (root == null) return null;
+        Queue<BinaryTreeNode> queue = new LinkedList<BinaryTreeNode>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            // swap the nodes
+            BinaryTreeNode current = queue.poll();
+            BinaryTreeNode temp = current.llink;
+            current.llink = current.rlink;
+            current.rlink = temp;
+            // add the children (when they exist) to the queue
+            if (current.llink != null) {
+                queue.offer(current.llink);
+            }
+            if (current.rlink != null) {
+                queue.offer(current.rlink);
+            }
+        }
+        return root;
     }
 
     public static void main(String[] args) {
@@ -38,7 +66,16 @@ public class InvertBinaryTree {
         node2.llink = node5;
         node2.rlink = node6;
         InvertBinaryTree invertBinaryTree = new InvertBinaryTree();
+
+        // invert the tree for the first time
         BinaryTreeNode headAfterInverting = invertBinaryTree.invertBinaryTree(root);
+        System.out.println("Printing through recursive approach:");
         LevelOrderTraversal.printLevelOrderTraversal(headAfterInverting);
+        System.out.println("\n");
+
+        // this should give us back the original tree as we are inverting an already inverted tree
+        BinaryTreeNode headAfterInvertingIterative = invertBinaryTree.invertBinaryTreeIterative(root);
+        System.out.println("Printing through iterative approach:");
+        LevelOrderTraversal.printLevelOrderTraversal(headAfterInvertingIterative);
     }
 }

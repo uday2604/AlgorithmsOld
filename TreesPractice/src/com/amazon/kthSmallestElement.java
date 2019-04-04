@@ -4,6 +4,7 @@ import java.util.Stack;
 
 /**
  * Created by uthota on 8/25/16.
+ * In-Order Traversal : kth smallest element is the corresponding element in the in-order traversal
  */
 public class kthSmallestElement {
     static class BinaryTreeNode {
@@ -19,7 +20,33 @@ public class kthSmallestElement {
     }
 
     // In-Order Traversal : kth smallest element is the corresponding element in the in-order traversal
+    // This method is in sync with the inorder traversal, so use this
     private int findKthSmallestElement(BinaryTreeNode root, int kthSmallest) {
+        if (root == null)
+            return -1;
+        else {
+            int result = 0;
+            Stack<BinaryTreeNode> nodeStoreStack = new Stack<>();
+            BinaryTreeNode current = root;
+            while (!nodeStoreStack.isEmpty() || current != null) {
+                if (current != null) {
+                    nodeStoreStack.push(current);
+                    current = current.llink;
+                } else {
+                    BinaryTreeNode temp = nodeStoreStack.pop();
+                    kthSmallest--;
+                    if (kthSmallest == 0)
+                        result = temp.data;
+                    current = temp.rlink;
+                }
+            }
+            return result;
+        }
+    }
+
+    // In-Order Traversal : kth smallest element is the corresponding element in the in-order traversal
+    // Alternate inorder traversal approach
+    private int findKthSmallestElementAlternate(BinaryTreeNode root, int kthSmallest) {
         if (root == null)
             return -1;
         else {

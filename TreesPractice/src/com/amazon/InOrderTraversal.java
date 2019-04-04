@@ -5,6 +5,7 @@ import java.util.Stack;
 
 /**
  * Created by uthota on 8/22/16.
+ * Inorder traversal: Recursive and Iterative
  */
 public class InOrderTraversal {
 
