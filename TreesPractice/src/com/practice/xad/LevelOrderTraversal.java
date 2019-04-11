@@ -10,35 +10,27 @@ import java.util.Queue;
 public class LevelOrderTraversal {
 
     public void LevelOrderTraversal(BinaryTreeNode head) {
-
-        if(head==null)
+        if (head == null) {
             System.out.println("No elements in the binary tree");
-
-        else {
-
+        } else {
             Queue<BinaryTreeNode> nodeStoreQueue = new LinkedList<>();
             nodeStoreQueue.offer(head);
 
-            while(!nodeStoreQueue.isEmpty()) {
-
+            while (!nodeStoreQueue.isEmpty()) {
                 BinaryTreeNode temp = nodeStoreQueue.poll();
-                System.out.print(temp.data+ " ");
+                System.out.print(temp.data + " ");
 
-                if(temp.llink!=null)
+                if (temp.llink != null) {
                     nodeStoreQueue.offer(temp.llink);
-
-                if(temp.rlink!=null)
+                }
+                if (temp.rlink != null) {
                     nodeStoreQueue.offer(temp.rlink);
+                }
             }
-
-
         }
-
     }
 
-
     public static void main(String[] args) {
-
         LevelOrderTraversal levelOrderTraversal = new LevelOrderTraversal();
         BinaryTreeNode root = new BinaryTreeNode(1);
 
@@ -49,17 +41,14 @@ public class LevelOrderTraversal {
         BinaryTreeNode node6 = new BinaryTreeNode(6);
         BinaryTreeNode node7 = new BinaryTreeNode(7);
 
-        root.llink=node2;
-        root.rlink=node3;
-        node2.llink=node4;
-        node2.rlink=node5;
+        root.llink = node2;
+        root.rlink = node3;
+        node2.llink = node4;
+        node2.rlink = node5;
 
-        node3.llink=node6;
-        node3.rlink=node7;
+        node3.llink = node6;
+        node3.rlink = node7;
 
         levelOrderTraversal.LevelOrderTraversal(root);
-
     }
-
-
 }

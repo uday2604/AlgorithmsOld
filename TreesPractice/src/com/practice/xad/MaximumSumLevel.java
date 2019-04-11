@@ -5,56 +5,46 @@ import java.util.Queue;
 
 /**
  * Created by Uday on 2016-05-18.
+ * Max level sum in a binary tree
  */
 public class MaximumSumLevel {
 
-    public int maxLevelSum(BinaryTreeNode root) {
+    private int maxLevelSum(BinaryTreeNode root) {
 
-        if(root==null)
+        if (root == null) {
             return -1;
+        } else {
+            int levelSum = 0;
+            int maxLevelSum = Integer.MIN_VALUE;
 
-        else {
-
-            int levelSum=0;
-            int maxLevelSum=Integer.MIN_VALUE;
-
-            Queue<BinaryTreeNode> nodeStoreQueue= new LinkedList<>();
+            Queue<BinaryTreeNode> nodeStoreQueue = new LinkedList<>();
             nodeStoreQueue.offer(root);
             nodeStoreQueue.offer(null);
 
-            while(!nodeStoreQueue.isEmpty()) {
-
-                BinaryTreeNode temp=nodeStoreQueue.poll();
-                if(temp!=null) {
-
-                    if(temp.llink!=null)
+            while (!nodeStoreQueue.isEmpty()) {
+                BinaryTreeNode temp = nodeStoreQueue.poll();
+                if (temp != null) {
+                    if (temp.llink != null) {
                         nodeStoreQueue.offer(temp.llink);
-
-                    if(temp.rlink!=null)
+                    }
+                    if (temp.rlink != null) {
                         nodeStoreQueue.offer(temp.rlink);
+                    }
+                    levelSum += temp.data;
 
-                    levelSum+=temp.data;
+                } else {
+                    if (levelSum > maxLevelSum) {
+                        maxLevelSum = levelSum;
+                    }
+                    levelSum = 0;
 
+                    if (!nodeStoreQueue.isEmpty())
+                        nodeStoreQueue.offer(null);
                 }
-
-                else {
-
-                    if(levelSum>maxLevelSum)
-                        maxLevelSum=levelSum;
-
-                    levelSum=0;
-
-                    if(!nodeStoreQueue.isEmpty())
-                    nodeStoreQueue.offer(null);
-
-                }
-
             }
-
             return maxLevelSum;
         }
     }
-
 
     public static void main(String[] args) {
 
@@ -73,22 +63,21 @@ public class MaximumSumLevel {
         BinaryTreeNode node10 = new BinaryTreeNode(10);
         BinaryTreeNode node11 = new BinaryTreeNode(11);
 
-        root.llink=node2;
-        root.rlink=node3;
-        node2.llink=node4;
-        node2.rlink=node5;
+        root.llink = node2;
+        root.rlink = node3;
+        node2.llink = node4;
+        node2.rlink = node5;
 
-        node3.llink=node6;
-        node3.rlink=node7;
+        node3.llink = node6;
+        node3.rlink = node7;
 
-        node4.llink=node8;
-        node4.rlink=node9;
+        node4.llink = node8;
+        node4.rlink = node9;
 
-        node5.llink=node10;
-        node5.rlink=node11;
+        node5.llink = node10;
+        node5.rlink = node11;
 
         int maxLevelSum = maximumSumLevelInstance.maxLevelSum(root);
-        System.out.println("The maximum level sum in tree "+maxLevelSum);
-
+        System.out.println("The maximum level sum in tree " + maxLevelSum);
     }
 }

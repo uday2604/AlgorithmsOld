@@ -6,6 +6,7 @@ import java.util.Stack;
 
 /**
  * Created by uthota on 8/24/16.
+ * Pre Order Traversal: Recursive and Iterative solutions
  */
 public class PreOrderTraversal {
 
@@ -19,16 +20,14 @@ public class PreOrderTraversal {
             this.llink = null;
             this.rlink = null;
         }
-
     }
-
 
     // Efficient and simple solution. As left side of tree should be processed before right tree, right link should be stored first in the stack
     // so that when popping from it, left node would be processed first
-    public List<BinaryTreeNode> preOrderTraversalIterative(BinaryTreeNode root) {
-        if (root == null)
+    private List<BinaryTreeNode> preOrderTraversalIterative(BinaryTreeNode root) {
+        if (root == null) {
             return null;
-        else {
+        } else {
             Stack<BinaryTreeNode> nodeStoreStack = new Stack<>();
             List<BinaryTreeNode> outputList = new ArrayList<>();
             nodeStoreStack.push(root);
@@ -47,8 +46,7 @@ public class PreOrderTraversal {
         }
     }
 
-
-    public void preOrderTraversal(BinaryTreeNode root) {
+    private void preOrderTraversal(BinaryTreeNode root) {
         if (root != null) {
             System.out.print(root.data + " ");
             preOrderTraversal(root.llink);
@@ -56,10 +54,7 @@ public class PreOrderTraversal {
         }
     }
 
-
     public static void main(String[] args) {
-
-
         BinaryTreeNode root = new BinaryTreeNode(3);
         BinaryTreeNode node1 = new BinaryTreeNode(4);
         BinaryTreeNode node2 = new BinaryTreeNode(5);
@@ -80,12 +75,10 @@ public class PreOrderTraversal {
         PreOrderTraversal preOrderTraversal = new PreOrderTraversal();
         preOrderTraversal.preOrderTraversal(root);
 
-
         System.out.println("\nThe pre order traversal through iterative method is:");
         List<BinaryTreeNode> outputList = preOrderTraversal.preOrderTraversalIterative(root);
 
         for (BinaryTreeNode temp : outputList)
             System.out.print(temp.data + " ");
-
     }
 }

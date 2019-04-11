@@ -9,41 +9,33 @@ public class InOrderTraversal {
 
     public void inOrderTraversal(BinaryTreeNode root) {
 
-        if(root!=null) {
+        if (root != null) {
 
             inOrderTraversal(root.llink);
-            System.out.print(root.data+ " ");
+            System.out.print(root.data + " ");
             inOrderTraversal(root.rlink);
         }
-
     }
 
     public void inOrderTraversalNonRecursive(BinaryTreeNode root) {
 
-        if(root==null)
+        if (root == null) {
             System.out.println("No elements in binary tree");
-
-        else {
-
+        } else {
             BinaryTreeNode current = root;
             Stack<BinaryTreeNode> nodeStoreStack = new Stack<BinaryTreeNode>();
 
-            while(!nodeStoreStack.isEmpty() || current!=null) {
-
-                if(current!=null) {
+            while (!nodeStoreStack.isEmpty() || current != null) {
+                if (current != null) {
                     nodeStoreStack.push(current);
-                    current=current.llink;
+                    current = current.llink;
+                } else {
+
+                    current = nodeStoreStack.pop();
+                    System.out.print(current.data + " ");
+                    current = current.rlink;
                 }
-
-                else {
-
-                   current = nodeStoreStack.pop();
-                    System.out.print(current.data+ " ");
-                    current=current.rlink;
-                }
-
             }
-
         }
     }
 
@@ -64,23 +56,22 @@ public class InOrderTraversal {
         BinaryTreeNode node10 = new BinaryTreeNode(10);
         BinaryTreeNode node11 = new BinaryTreeNode(11);
 
-        root.llink=node2;
-        root.rlink=node3;
-        node2.llink=node4;
-        node2.rlink=node5;
+        root.llink = node2;
+        root.rlink = node3;
+        node2.llink = node4;
+        node2.rlink = node5;
 
-        node3.llink=node6;
-        node3.rlink=node7;
+        node3.llink = node6;
+        node3.rlink = node7;
 
-        node4.llink=node8;
-        node4.rlink=node9;
+        node4.llink = node8;
+        node4.rlink = node9;
 
-        node5.llink=node10;
-        node5.rlink=node11;
+        node5.llink = node10;
+        node5.rlink = node11;
 
-       inOrderTraversal.inOrderTraversal(root);
-       System.out.println();
+        inOrderTraversal.inOrderTraversal(root);
+        System.out.println();
         inOrderTraversal.inOrderTraversalNonRecursive(root);
-
     }
 }
